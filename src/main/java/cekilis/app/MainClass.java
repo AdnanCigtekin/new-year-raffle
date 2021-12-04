@@ -31,8 +31,8 @@ public class MainClass {
 	    for(KatilimciPOJO katilimci : pairedKatilimcilar) {
 	    	String to =  katilimci.mail ; 
 	 	    String subject = "Hangi reise hediye alacağını biliyon mu " + katilimci.name + "!";
-	 	    String body = "Selamın aleyküm " + katilimci.name + " reis,\nKime hediye alacağını biliyon mu? Ben biliyom bu sefer ehehehehe.\n\nBu şanslı kişi aşağıda belirtilmiştir:\n\n\n\n\n\n\n\n" + katilimci.receiverName + " reis! UUUİİİİYYYYYYYYY!\n\nSize iyi günler dilerim ve ben kaçarım.\n\nSaygılarımla,\nAdnanın bilgisayarı\n\n\n";
-	 	    body += "\n NOT:Kodumun linkine şuradan ulaşabilirsiniz: https://github.com/AdnanCigtekin/new-year-raffle";
+	 	    String body = "Öncelikle selamın aleyküm " + katilimci.name + " reis,\nKime hediye alacağını biliyon mu? Ben biliyom!.\n\nBu şanslı kişi aşağıda belirtilmiştir:\n\n\n\n\n\n\n\n" + katilimci.receiverName + " reis!\n\nSize iyi günler dilerim ve ben kaçarım.\n\nSaygılarımla, Büyük Reis!\n\n\n\n";
+	 	    body += "\n NOT: Kodumun linki: https://github.com/AdnanCigtekin/new-year-raffle";
 	 	    Utilities.sendFromGMail(reisMail, reisPass, to, subject, body);
 	 	    System.out.println("Sent mail to " + katilimci.name + " mail :" + katilimci.mail);
 	    }
