@@ -17,6 +17,41 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
 public class Utilities {
+
+
+	public static void sendFromOutlook(String from, String pass, String to, String subject, String body) {
+		Properties props = System.getProperties();
+		String host = "smtp-mail.outlook.com";
+		props.put("mail.smtp.starttls.enable", "true");
+		props.put("mail.smtp.host", host);
+		props.put("mail.smtp.user", from);
+		props.put("mail.smtp.password", pass);
+		props.put("mail.smtp.port", "587");
+		props.put("mail.smtp.auth", "true");
+
+		Session session = Session.getDefaultInstance(props);
+		MimeMessage message = new MimeMessage(session);
+
+		try {
+			message.setFrom(new InternetAddress(from));
+
+			message.addRecipient(Message.RecipientType.TO, new InternetAddress(to));
+
+			message.setSubject(subject);
+			message.setText(body);
+			Transport transport = session.getTransport("smtp");
+			transport.connect(host, from, pass);
+			transport.sendMessage(message, message.getAllRecipients());
+			transport.close();
+		}
+		catch (AddressException ae) {
+			ae.printStackTrace();
+		}
+		catch (MessagingException me) {
+			me.printStackTrace();
+		}
+	}
+
 	
     public static void sendFromGMail(String from, String pass, String to, String subject, String body) {
         Properties props = System.getProperties();
@@ -122,4 +157,19 @@ public class Utilities {
     	
     	return input;
     }
+
+
+
+	public static String getColor(Boolean willSelectColor){
+		if(willSelectColor){
+			Random rand = new Random();
+			int selectedColorIndex = rand.nextInt(Constants.COLORS.size());
+			String selectedColor = Constants.COLORS.get(selectedColorIndex);
+			System.out.println("Selected " + selectedColor + " for color");
+			Constants.COLORS.remove(selectedColorIndex);
+			return selectedColor;
+		}
+		return null;
+
+	}
 }
